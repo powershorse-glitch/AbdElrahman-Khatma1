@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صدقة جارية | الفقيد عبد الرحمن أحمد</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+        }
+        .quran-font {
+            font-family: 'Amiri', serif;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-emerald-glass {
+            background: rgba(6, 78, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .card-glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12 flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="text-center py-8 px-4 relative">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-900/60 text-emerald-300 text-sm font-semibold mb-4 border border-emerald-500/30">
+                ✨ صدقة جارية
+            </span>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-3">
+                ختمة قرآن وأذكار لروح الفقيد
+            </h1>
+            <h2 class="text-2xl md:text-4xl font-bold gold-gradient mb-4 quran-font">
+                عبد الرحمن أحمد
+            </h2>
+            <p class="text-slate-300 text-sm md:text-base max-w-xl mx-auto leading-relaxed quran-font">
+                "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ"
+            </p>
+        </div>
+    </header>
+
+    <!-- Global Counters -->
+    <section class="max-w-4xl mx-auto px-4 w-full mb-8">
+        <div class="grid grid-cols-3 gap-3 md:gap-6 text-center">
+            <div class="card-glass p-4 rounded-2xl">
+                <i class="fa-solid fa-users text-emerald-400 text-xl md:text-2xl mb-1"></i>
+                <div id="visitors-count" class="text-xl md:text-3xl font-black text-white">1</div>
+                <div class="text-xs md:text-sm text-slate-400">عدد الزوار</div>
+            </div>
+            <div class="card-glass p-4 rounded-2xl">
+                <i class="fa-solid fa-book-quran text-amber-400 text-xl md:text-2xl mb-1"></i>
+                <div id="khatma-count" class="text-xl md:text-3xl font-black text-white">0</div>
+                <div class="text-xs md:text-sm text-slate-400">إجمالي الختمات</div>
+            </div>
+            <div class="card-glass p-4 rounded-2xl">
+                <i class="fa-solid fa-hands-praying text-teal-400 text-xl md:text-2xl mb-1"></i>
+                <div id="tasbeeh-count" class="text-xl md:text-3xl font-black text-white">0</div>
+                <div class="text-xs md:text-sm text-slate-400">إجمالي التسبيحات</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Tasbeeh Section -->
+    <section class="max-w-xl mx-auto px-4 w-full mb-10">
+        <div class="bg-emerald-glass p-6 rounded-3xl text-center shadow-2xl relative overflow-hidden">
+            <h3 class="text-xl font-bold text-emerald-200 mb-2">المسبحة الإلكترونية</h3>
+            <p class="text-xs text-emerald-300/80 mb-6">اضغط للتسبيح واحتساب الأجر</p>
+
+            <button onclick="addTasbeeh()" class="w-36 h-36 md:w-44 md:h-44 mx-auto rounded-full bg-gradient-to-br from-emerald-500 to-teal-700 text-white font-extrabold text-2xl shadow-lg hover:scale-105 active:scale-95 transition duration-150 flex flex-col items-center justify-center border-4 border-emerald-300/30">
+                <span>سبّح</span>
+                <span class="text-xs font-normal mt-1 opacity-80">انقر هنا</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Quran Parts Tracker (30 Ajzaa) -->
+    <section class="max-w-4xl mx-auto px-4 w-full mb-12">
+        <div class="card-glass p-6 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-3">
+                <div>
+                    <h3 class="text-xl font-bold text-white">جدول الأجزاء القرآنية</h3>
+                    <p class="text-xs text-slate-400">اختر الجزء الذي قرأته لتحديث حالته</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="addKhatmaManually()" class="text-xs bg-amber-600 hover:bg-amber-500 text-white px-3 py-2 rounded-xl font-bold shadow transition flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> ختمت القرآن (+1)
+                    </button>
+                    <button onclick="resetCurrentKhatma()" class="text-xs bg-red-900/40 text-red-300 border border-red-500/30 px-3 py-2 rounded-xl hover:bg-red-800/50">
+                        تفريغ الأجزاء
+                    </button>
+                </div>
+            </div>
+
+            <div id="juz-grid" class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-2.5">
+                <!-- 30 Juz items generated via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Share -->
+    <footer class="text-center px-4 max-w-md mx-auto w-full">
+        <button onclick="shareSite()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2 mb-4">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            مشاركة الرابط لكسب الأجر
+        </button>
+        <p class="text-xs text-slate-500">تقبل الله منا ومنكم صالح الأعمال وجعلها في ميزان حسنات الفقيد عبد الرحمن أحمد.</p>
+    </footer>
+
+    <script>
+        // جلب البيانات أو تهيئتها
+        let visitors = parseInt(localStorage.getItem('abdelrahman_visitors') || '1');
+        if (!sessionStorage.getItem('counted')) {
+            visitors++;
+            localStorage.setItem('abdelrahman_visitors', visitors);
+            sessionStorage.setItem('counted', 'true');
+        }
+        let tasbeeh = parseInt(localStorage.getItem('abdelrahman_tasbeeh') || '0');
+        let khatmat = parseInt(localStorage.getItem('abdelrahman_khatmat') || '0');
+        let ajzaa = JSON.parse(localStorage.getItem('abdelrahman_ajzaa') || '{}');
+
+        // تحديث الواجهة
+        function updateUI() {
+            document.getElementById('visitors-count').innerText = visitors.toLocaleString('ar-EG');
+            document.getElementById('tasbeeh-count').innerText = tasbeeh.toLocaleString('ar-EG');
+            document.getElementById('khatma-count').innerText = khatmat.toLocaleString('ar-EG');
+            
+            const grid = document.getElementById('juz-grid');
+            grid.innerHTML = '';
+
+            for (let i = 1; i <= 30; i++) {
+                const status = ajzaa[i] || 'empty';
+                let bgClass = "bg-slate-800/80 hover:bg-slate-700 text-slate-300 border-slate-700";
+                let statusText = "متاح";
+
+                if (status === 'reserved') {
+                    bgClass = "bg-amber-900/50 text-amber-300 border-amber-500/40";
+                    statusText = "جاري القراءة";
+                } else if (status === 'done') {
+                    bgClass = "bg-emerald-900/60 text-emerald-300 border-emerald-500/50";
+                    statusText = "تمت القراءة";
+                }
+
+                grid.innerHTML += `
+                    <button onclick="toggleJuz(${i})" class="${bgClass} border p-3 rounded-xl flex flex-col items-center justify-center transition hover:scale-105">
+                        <span class="text-xs opacity-75">الجزء</span>
+                        <span class="text-base font-extrabold my-0.5">${i}</span>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-black/20">${statusText}</span>
+                    </button>
+                `;
+            }
+        }
+
+        // زيادة التسبيح
+        function addTasbeeh() {
+            tasbeeh++;
+            localStorage.setItem('abdelrahman_tasbeeh', tasbeeh);
+            updateUI();
+            if (navigator.vibrate) navigator.vibrate(40);
+        }
+
+        // إضافة ختمة يدوية
+        function addKhatmaManually() {
+            khatmat++;
+            localStorage.setItem('abdelrahman_khatmat', khatmat);
+            updateUI();
+            alert("تقبل الله طاعتكم! تمت إضافة ختمة جديدة لميزان حسنات الفقيد عبد الرحمن أحمد.");
+        }
+
+        // تغيير حالة الجزء
+        function toggleJuz(id) {
+            let current = ajzaa[id] || 'empty';
+            if (current === 'empty') ajzaa[id] = 'reserved';
+            else if (current === 'reserved') ajzaa[id] = 'done';
+            else ajzaa[id] = 'empty';
+
+            localStorage.setItem('abdelrahman_ajzaa', JSON.stringify(ajzaa));
+            updateUI();
+        }
+
+        // تصفير الأجزاء
+        function resetCurrentKhatma() {
+            if (confirm("هل تريد إخلاء جميع الأجزاء لبدء توزيع الأجزاء من جديد؟")) {
+                ajzaa = {};
+                localStorage.setItem('abdelrahman_ajzaa', JSON.stringify(ajzaa));
+                updateUI();
+            }
+        }
+
+        // مشاركة الموقع
+        function shareSite() {
+            const text = "صدقة جارية لروح الفقيد عبد الرحمن أحمد - شارك معنا في الختمة القرآنية والتسبيح:";
+            const url = window.location.href;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`, '_blank');
+        }
+
+        // التشغيل الأولي
+        updateUI();
+    </script>
+</body>
+</html>
